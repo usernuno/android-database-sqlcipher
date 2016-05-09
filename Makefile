@@ -52,8 +52,46 @@ clean: clean-ndk clean-java
 	make clean
 	rm sqlcipher-for-android-*.zip
 
-distclean: clean
+distclean.old: clean
 	rm -rf ${EXTERNAL_DIR}/android-libs
+
+distclean:
+	rm -rf build.xml
+	rm -rf local.properties
+	rm -rf proguard-project.txt
+	rm -rf bin gen jni/libs libs obj
+	rm -rf ${EXTERNAL_DIR}/android-libs
+	-rm -rf ${EXTERNAL_DIR}/openssl/Makefile
+	-rm -rf ${EXTERNAL_DIR}/openssl/Makefile.bak
+	-rm -rf ${EXTERNAL_DIR}/openssl/apps/CA.pl
+	-rm -rf ${EXTERNAL_DIR}/openssl/apps/md4.c
+	-rm -rf ${EXTERNAL_DIR}/openssl/crypto/buildinf.h
+	-rm -rf ${EXTERNAL_DIR}/openssl/crypto/opensslconf.h
+	-rm -rf ${EXTERNAL_DIR}/openssl/crypto/*.[os]
+	-rm -rf ${EXTERNAL_DIR}/openssl/crypto/*/*.[osS]
+	-rm -rf ${EXTERNAL_DIR}/openssl/crypto/*/lib
+	-rm -rf ${EXTERNAL_DIR}/openssl/crypto/lib
+	-rm -rf ${EXTERNAL_DIR}/openssl/include
+	-rm -rf ${EXTERNAL_DIR}/openssl/test/evptests.txt
+	-rm -rf ${EXTERNAL_DIR}/openssl/test/[bcehjsvw]*.c
+	-rm -rf ${EXTERNAL_DIR}/openssl/test/d[ehs]*.c
+	-rm -rf ${EXTERNAL_DIR}/openssl/test/id*.c
+	-rm -rf ${EXTERNAL_DIR}/openssl/test/md*.c
+	-rm -rf ${EXTERNAL_DIR}/openssl/test/r[a-z]*.c
+	-rm -rf ${EXTERNAL_DIR}/openssl/test/md*.c
+	-rm -rf ${EXTERNAL_DIR}/openssl/tools/c_rehash
+	-rm -rf ${SQLCIPHER_DIR}/fts5*
+	-rm -rf ${SQLCIPHER_DIR}/.target_source
+	-rm -rf ${SQLCIPHER_DIR}/Makefile
+	-rm -rf ${SQLCIPHER_DIR}/*.[hc]
+	-rm -rf ${SQLCIPHER_DIR}/config.log
+	-rm -rf ${SQLCIPHER_DIR}/config.status
+	-rm -rf ${SQLCIPHER_DIR}/lemon
+	-rm -rf ${SQLCIPHER_DIR}/libtool
+	-rm -rf ${SQLCIPHER_DIR}/mkkeywordhash
+	-rm -rf ${SQLCIPHER_DIR}/parse.*
+	-rm -rf ${SQLCIPHER_DIR}/sqlcipher.pc
+	-rm -rf ${SQLCIPHER_DIR}/tsrc
 
 copy-libs:
 	cp -R ${JNI_DIR}/libs/* ${LIBS_DIR}
