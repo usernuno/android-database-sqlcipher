@@ -1,6 +1,12 @@
-*** Download Source and Binaries
+** Android API 23 fixes
 
-    The latest binary packages for developers, with the jar’s, .so’s and a quick sample can be [[https://www.zetetic.net/sqlcipher/open-source][here]], the source can be found [[https://github.com/sqlcipher/android-database-sqlcipher][here]].
+This version is used by [[https://github.com/litehelpers/Cordova-sqlcipher-adapter][litehelpers / Cordova-sqlcipher-adapter]] to provide a working version for Android N preview, built for Android API 23.
+
+- Based on =android-n-preview= branch of [[https://github.com/sqlcipher/android-database-sqlcipher][sqlcipher / android-database-sqlcipher]] (ref: [[https://github.com/sqlcipher/android-database-sqlcipher/issues/216][sqlcipher/android-database-sqlcipher#216]]) and should work on Android N preview.
+- Includes [[https://github.com/sqlcipher/android-database-sqlcipher/pull/231][fix in PR sqlcipher/android-database-sqlcipher#231]]  to support =AbstractCursor.setExtras= and =AbstractCursor.getExtras= as required by Android API 23.
+- Default build target is updated to =android-23=.
+
+** Original SQLCipher for Android information
 
 *** Compatibility
 
