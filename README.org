@@ -2,7 +2,7 @@
 
 SQLCipher interface for Android based on =api-fix-master= branch of [[https://github.com/brodybits/android-database-sqlcipher-fixes][brodybits / android-database-sqlcipher-fixes]] and used by [[https://github.com/OutSystems/cordova-sqlcipher-adapter][OutSystems / cordova-sqlcipher-adapter]] to provide:
 
-- Support for queries with binaries larger than 500 kB
+- Support for queries with resulting rows larger than 500 kB (up to 20 MB)
 
 Below is an updated version of the source branch's README for further documentation, as of the last merge.
 
