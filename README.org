@@ -1,3 +1,13 @@
+* OutSystems' version of SQLCipher for Android
+
+SQLCipher interface for Android based on =api-fix-master= branch of [[https://github.com/brodybits/android-database-sqlcipher-fixes][brodybits / android-database-sqlcipher-fixes]] and used by [[https://github.com/OutSystems/cordova-sqlcipher-adapter][OutSystems / cordova-sqlcipher-adapter]] to provide:
+
+- Support for queries with binaries larger than 500 kB
+
+Below is an updated version of the source branch's README for further documentation, as of the last merge.
+
+* Original README information
+
 ** Android API 23 fixes
 
 This version is used by [[https://github.com/litehelpers/Cordova-sqlcipher-adapter][litehelpers / Cordova-sqlcipher-adapter]] to provide a working version for Android N preview, built for Android API 23.
