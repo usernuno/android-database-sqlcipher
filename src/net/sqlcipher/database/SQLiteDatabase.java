@@ -1605,7 +1605,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      *            will return all rows for the given table.
      * @param selectionArgs You may include ?s in selection, which will be
      *         replaced by the values from selectionArgs, in order that they
-     *         appear in the selection. The values will be bound as Strings.
+     *         appear in the selection.
      * @param groupBy A filter declaring how to group rows, formatted as an SQL
      *            GROUP BY clause (excluding the GROUP BY itself). Passing null
      *            will cause the rows to not be grouped.
@@ -1629,7 +1629,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      * @see Cursor
      */
     public Cursor query(boolean distinct, String table, String[] columns,
-                        String selection, String[] selectionArgs, String groupBy,
+                        String selection, Object[] selectionArgs, String groupBy,
                         String having, String orderBy, String limit) {
         return queryWithFactory(null, distinct, table, columns, selection, selectionArgs,
                                 groupBy, having, orderBy, limit);
@@ -1649,7 +1649,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      *            will return all rows for the given table.
      * @param selectionArgs You may include ?s in selection, which will be
      *         replaced by the values from selectionArgs, in order that they
-     *         appear in the selection. The values will be bound as Strings.
+     *         appear in the selection.
      * @param groupBy A filter declaring how to group rows, formatted as an SQL
      *            GROUP BY clause (excluding the GROUP BY itself). Passing null
      *            will cause the rows to not be grouped.
@@ -1671,7 +1671,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      */
     public Cursor queryWithFactory(CursorFactory cursorFactory,
                                    boolean distinct, String table, String[] columns,
-                                   String selection, String[] selectionArgs, String groupBy,
+                                   String selection, Object[] selectionArgs, String groupBy,
                                    String having, String orderBy, String limit) {
         if (!isOpen()) {
             throw new IllegalStateException("database not open");
@@ -1695,7 +1695,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      *            will return all rows for the given table.
      * @param selectionArgs You may include ?s in selection, which will be
      *         replaced by the values from selectionArgs, in order that they
-     *         appear in the selection. The values will be bound as Strings.
+     *         appear in the selection.
      * @param groupBy A filter declaring how to group rows, formatted as an SQL
      *            GROUP BY clause (excluding the GROUP BY itself). Passing null
      *            will cause the rows to not be grouped.
@@ -1717,7 +1717,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      * @see Cursor
      */
     public Cursor query(String table, String[] columns, String selection,
-                        String[] selectionArgs, String groupBy, String having,
+                        Object[] selectionArgs, String groupBy, String having,
                         String orderBy) {
 
         return query(false, table, columns, selection, selectionArgs, groupBy,
@@ -1736,7 +1736,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      *            will return all rows for the given table.
      * @param selectionArgs You may include ?s in selection, which will be
      *         replaced by the values from selectionArgs, in order that they
-     *         appear in the selection. The values will be bound as Strings.
+     *         appear in the selection.
      * @param groupBy A filter declaring how to group rows, formatted as an SQL
      *            GROUP BY clause (excluding the GROUP BY itself). Passing null
      *            will cause the rows to not be grouped.
@@ -1760,7 +1760,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      * @see Cursor
      */
     public Cursor query(String table, String[] columns, String selection,
-                        String[] selectionArgs, String groupBy, String having,
+                        Object[] selectionArgs, String groupBy, String having,
                         String orderBy, String limit) {
 
         return query(false, table, columns, selection, selectionArgs, groupBy,
@@ -1772,8 +1772,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      *
      * @param sql the SQL query. The SQL string must not be ; terminated
      * @param selectionArgs You may include ?s in where clause in the query,
-     *     which will be replaced by the values from selectionArgs. The
-     *     values will be bound as Strings.
+     *     which will be replaced by the values from selectionArgs.
      *
      * @return A {@link Cursor} object, which is positioned before the first entry. Note that
      * {@link Cursor}s are not synchronized, see the documentation for more details.
@@ -1781,7 +1780,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      * @throws SQLiteException if there is an issue executing the sql or the SQL string is invalid
      * @throws IllegalStateException if the database is not open
      */
-    public Cursor rawQuery(String sql, String[] selectionArgs) {
+    public Cursor rawQuery(String sql, Object[] selectionArgs) {
         return rawQueryWithFactory(null, sql, selectionArgs, null);
     }
 
@@ -1791,8 +1790,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      * @param cursorFactory the cursor factory to use, or null for the default factory
      * @param sql the SQL query. The SQL string must not be ; terminated
      * @param selectionArgs You may include ?s in where clause in the query,
-     *     which will be replaced by the values from selectionArgs. The
-     *     values will be bound as Strings.
+     *     which will be replaced by the values from selectionArgs.
      * @param editTable the name of the first table, which is editable
      *
      * @return A {@link Cursor} object, which is positioned before the first entry. Note that
@@ -1802,7 +1800,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      * @throws IllegalStateException if the database is not open
      */
     public Cursor rawQueryWithFactory(
-                                      CursorFactory cursorFactory, String sql, String[] selectionArgs,
+                                      CursorFactory cursorFactory, String sql, Object[] selectionArgs,
                                       String editTable) {
         if (!isOpen()) {
             throw new IllegalStateException("database not open");
@@ -1848,8 +1846,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      * when the later batches are ready.
      * @param sql the SQL query. The SQL string must not be ; terminated
      * @param selectionArgs You may include ?s in where clause in the query,
-     *     which will be replaced by the values from selectionArgs. The
-     *     values will be bound as Strings.
+     *     which will be replaced by the values from selectionArgs. 
      * @param initialRead set the initial count of items to read from the cursor
      * @param maxRead set the count of items to read on each iteration after the first
      * @return A {@link Cursor} object, which is positioned before the first entry. Note that
@@ -1859,7 +1856,7 @@ public class SQLiteDatabase extends SQLiteClosable {
      * hidden.
      * @hide
      */
-    public Cursor rawQuery(String sql, String[] selectionArgs,
+    public Cursor rawQuery(String sql, Object[] selectionArgs,
                            int initialRead, int maxRead) {
       net.sqlcipher.CursorWrapper cursorWrapper = (net.sqlcipher.CursorWrapper)rawQueryWithFactory(null, sql, selectionArgs, null);
       ((SQLiteCursor)cursorWrapper.getWrappedCursor()).setLoadStyle(initialRead, maxRead);
@@ -2362,7 +2359,7 @@ public class SQLiteDatabase extends SQLiteClosable {
   private void openDatabaseInternal(final char[] password, SQLiteDatabaseHook hook) {
     boolean shouldCloseConnection = true;
     final byte[] keyMaterial = getBytes(password);
-    dbopen(mPath, mFlags);
+        dbopen(mPath, mFlags);
     try {
       
       keyDatabase(hook, new Runnable() {
@@ -2423,30 +2420,30 @@ public class SQLiteDatabase extends SQLiteClosable {
   }
   
   private void keyDatabase(SQLiteDatabaseHook databaseHook, Runnable keyOperation) {
-    if(databaseHook != null) {
-      databaseHook.preKey(this);
-    }
+        if(databaseHook != null) {
+            databaseHook.preKey(this);
+        }
     if(keyOperation != null){
       keyOperation.run();
     }
-    if(databaseHook != null){
-      databaseHook.postKey(this);
-    }
-    if (SQLiteDebug.DEBUG_SQL_CACHE) {
-      mTimeOpened = getTime();
-    }
-    try {
-      Cursor cursor = rawQuery("select count(*) from sqlite_master;", new String[]{});
-      if(cursor != null){
-        cursor.moveToFirst();
-        int count = cursor.getInt(0);
-        cursor.close();
-      }
-    } catch (RuntimeException e) {
+        if(databaseHook != null){
+            databaseHook.postKey(this);
+        }
+        if (SQLiteDebug.DEBUG_SQL_CACHE) {
+            mTimeOpened = getTime();
+        }
+        try {
+          Cursor cursor = rawQuery("select count(*) from sqlite_master;", new Object[]{});
+          if(cursor != null){
+            cursor.moveToFirst();
+            int count = cursor.getInt(0);
+            cursor.close();
+          }
+        } catch (RuntimeException e) {
       Log.e(TAG, e.getMessage(), e);
-      throw e;
+            throw e;
+        }
     }
-  }
 
     private String getTime() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS ").format(System.currentTimeMillis());
@@ -2861,7 +2858,7 @@ public class SQLiteDatabase extends SQLiteClosable {
 
     private native int native_status(int operation, boolean reset);
 
-    private native void native_key(char[] key) throws SQLException;
+  private native void native_key(char[] key) throws SQLException;
   
     private native void native_rekey(String key) throws SQLException;
 

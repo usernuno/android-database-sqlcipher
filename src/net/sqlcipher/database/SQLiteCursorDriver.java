@@ -29,9 +29,10 @@ public interface SQLiteCursorDriver {
      * 
      * @param factory The CursorFactory to use when creating the Cursors, or
      *         null if standard SQLiteCursors should be returned.
+	 * @param bindArgs The arguments to pass to the query
      * @return a Cursor over the result set
      */
-    Cursor query(CursorFactory factory, String[] bindArgs);
+    Cursor query(CursorFactory factory, Object[] bindArgs);
 
     /**
      * Called by a SQLiteCursor when it is released.
@@ -54,5 +55,5 @@ public interface SQLiteCursorDriver {
      * Set new bind arguments. These will take effect in cursorRequeried().
      * @param bindArgs the new arguments
      */
-    public void setBindArguments(String[] bindArgs);
+    public void setBindArguments(Object[] bindArgs);
 }
