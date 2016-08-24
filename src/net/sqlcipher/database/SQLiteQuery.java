@@ -34,7 +34,7 @@ public class SQLiteQuery extends SQLiteProgram {
     private int mOffsetIndex;
     
     /** Args to bind on requery */
-    private String[] mBindArgs;
+    private Object[] mBindArgs;
 
     private boolean mClosed = false;
 
@@ -44,8 +44,9 @@ public class SQLiteQuery extends SQLiteProgram {
      * @param db The database that this query object is associated with
      * @param query The SQL string for this query. 
      * @param offsetIndex The 1-based index to the OFFSET parameter, 
+	 * @param bindArgs Arguments to bind to this query
      */
-    /* package */ SQLiteQuery(SQLiteDatabase db, String query, int offsetIndex, String[] bindArgs) {
+    /* package */ SQLiteQuery(SQLiteDatabase db, String query, int offsetIndex, Object[] bindArgs) {
         super(db, query);
 
         mOffsetIndex = offsetIndex;
@@ -136,7 +137,7 @@ public class SQLiteQuery extends SQLiteProgram {
         super.close();
         mClosed = true;
     }
-
+	
     /**
      * Called by SQLiteCursor when it is requeried.
      */
@@ -145,7 +146,7 @@ public class SQLiteQuery extends SQLiteProgram {
             int len = mBindArgs.length;
             try {
                 for (int i = 0; i < len; i++) {
-                    super.bindString(i + 1, mBindArgs[i]);
+					this.bindObject(i + 1, mBindArgs[i]);
                 }
             } catch (SQLiteMisuseException e) {
                 StringBuilder errMsg = new StringBuilder("mSql " + mSql);
@@ -160,6 +161,18 @@ public class SQLiteQuery extends SQLiteProgram {
             }
         }
     }
+	
+	public void bindObject(int index, Object argValue) {
+		if (argValue instanceof Double) {
+			super.bindDouble(index, (Double) argValue);
+		} else if (argValue instanceof Long) {
+			super.bindLong(index, (Long) argValue);
+		} else if (argValue == null) {
+			super.bindNull(index);
+		} else {
+			super.bindString(index, (String) argValue);
+		}
+	}
 
     @Override
     public void bindNull(int index) {
@@ -169,13 +182,13 @@ public class SQLiteQuery extends SQLiteProgram {
 
     @Override
     public void bindLong(int index, long value) {
-        mBindArgs[index - 1] = Long.toString(value);
+        mBindArgs[index - 1] = value;
         if (!mClosed) super.bindLong(index, value);
     }
 
     @Override
     public void bindDouble(int index, double value) {
-        mBindArgs[index - 1] = Double.toString(value);
+        mBindArgs[index - 1] = value;
         if (!mClosed) super.bindDouble(index, value);
     }
 
