@@ -244,7 +244,9 @@ namespace sqlcipher {
     }
 #endif
 
+#if 0 // DISABLED:
     sqlite3_enable_load_extension(handle, 1);
+#endif
 
     LOGV("Opened '%s' - %p\n", path8, handle);
     env->SetLongField(object, offset_db_handle, (intptr_t)handle);

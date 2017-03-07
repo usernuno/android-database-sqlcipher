@@ -1,6 +1,15 @@
-*** Download Source and Binaries
+*** android-database-sqlcipher-build-fix
 
-    The latest binary packages for developers, with the jar’s, .so’s and a quick sample can be [[https://www.zetetic.net/sqlcipher/open-source][here]], the source can be found [[https://github.com/sqlcipher/android-database-sqlcipher][here]].
+Some build flags fixed for [[https://github.com/litehelpers/Cordova-sqlcipher-adapter][Cordova-sqlcipher-adapter]]
+
+Some duplicate and other nonsensical options removed.
+
+=SQLITE_DEFAULT_PAGE_SIZE= set to =1024= to avoid "potentially disruptive" [[http://sqlite.org/pgszchng2016.html][default page size changes]] from [[http://sqlite.org/releaselog/3_12_0.html][sqlite 3.12.0]] for unencrypted databases.
+
+Other features disabled:
+- [[https://www.sqlite.org/lang_corefunc.html#soundex][soundex]]
+- [[https://www.sqlite.org/fileformat2.html#stat3tab][sqlite3_stat3 table]]
+- [[https://www.sqlite.org/fileformat2.html#stat4tab][sqlite3_stat4 table]]
 
 *** Compatibility
 
