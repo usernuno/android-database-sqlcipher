@@ -19,10 +19,21 @@ This version is used by [[https://github.com/litehelpers/Cordova-sqlcipher-adapt
 
 ** Original SQLCipher for Android information
 
+Some build flags fixed for [[https://github.com/litehelpers/Cordova-sqlcipher-adapter][Cordova-sqlcipher-adapter]]
+
+Some duplicate and other nonsensical options removed.
+
+=SQLITE_DEFAULT_PAGE_SIZE= set to =1024= to avoid "potentially disruptive" [[http://sqlite.org/pgszchng2016.html][default page size changes]] from [[http://sqlite.org/releaselog/3_12_0.html][sqlite 3.12.0]] for unencrypted databases.
+
+Other features disabled:
+- [[https://www.sqlite.org/lang_corefunc.html#soundex][soundex]]
+- [[https://www.sqlite.org/fileformat2.html#stat3tab][sqlite3_stat3 table]]
+- [[https://www.sqlite.org/fileformat2.html#stat4tab][sqlite3_stat4 table]]
+
 *** Compatibility
 
-    SQLCipher for Android runs on Android 2.1 - 6.0, both x86 and ARM architectures.
-
+    SQLCipher for Android runs on Android 2.1 - Android N, for =armeabi=, =armeabi-v7a=, =x86=, =x86_64=, and =arm64_v8a= architectures.
+    
 *** Contributions
 
 We welcome contributions, to contribute to SQLCipher for Android, a [[https://www.zetetic.net/contributions/][contributor agreement]] needs to be submitted.  All submissions should be based on the =master= branch.
